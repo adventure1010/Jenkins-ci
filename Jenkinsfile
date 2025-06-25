@@ -15,16 +15,13 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                // Build package skipping tests in first step for speed (optional)
                 sh 'mvn clean package'
-                // Run tests (unit + integration)
                 sh 'mvn test'
             }
         }
 
         stage('Generate Reports') {
             steps {
-                // Checkstyle and coverage reports (optional, but no SonarQube)
                 sh 'mvn checkstyle:checkstyle'
                 sh 'mvn jacoco:report'
             }
@@ -53,11 +50,11 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Replace with your deploy commands or scripts
                 sh '''
                     docker rm -f vpro-container || true
-                    docker run -d -p 8080:8080 --name vpro-container ${DOCKER_IMAGE}
+                    docker run -d -p 8081:8080 --name vpro-container ${DOCKER_IMAGE}
                 '''
+                echo "🚀 Application deployed. Visit http://<your-server-ip>:8081 to view it."
             }
         }
     }
