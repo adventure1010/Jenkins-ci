@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "frintzy2024/vpro-app:${env.BUILD_ID}"
-        DOCKERHUB_CREDENTIALS = "dockerhub-creds-id"  // Replace with your Jenkins Docker Hub creds ID
+        DOCKERHUB_CREDENTIALS = "dockercredID"  // Replace with your Jenkins Docker Hub creds ID
     }
 
     stages {
