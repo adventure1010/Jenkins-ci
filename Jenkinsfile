@@ -25,11 +25,6 @@ pipeline {
                 sh 'mvn checkstyle:checkstyle'
                 sh 'mvn jacoco:report'
             }
-            post {
-                success {
-                    echo '✅ Static code analysis reports generated.'
-                }
-            }
         }
 
         stage('Build Docker Image') {
@@ -40,10 +35,11 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-                        sh "docker push ${DOCKER_IMAGE}"
-                    }
+                withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
+                    sh """
+                        echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
+                        docker push ${DOCKER_IMAGE}
+                    """
                 }
             }
         }
@@ -54,7 +50,7 @@ pipeline {
                     docker rm -f vpro-container || true
                     docker run -d -p 8081:8080 --name vpro-container ${DOCKER_IMAGE}
                 '''
-                echo "🚀 Application deployed. Visit http://<your-server-ip>:8081 to view it."
+                echo "🚀 Deployed at: http://<your-server-ip>:8081"
             }
         }
     }
