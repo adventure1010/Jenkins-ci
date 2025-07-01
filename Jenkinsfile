@@ -3,13 +3,13 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "frintzy2024/vpro-app:${env.BUILD_ID}"
-        DOCKERHUB_CREDENTIALS = "dockercredID"  // Replace with your Jenkins Docker Hub creds ID
+        DOCKERHUB_CREDENTIALS = "DockercredID"  // Replace with your Jenkins Docker Hub creds ID
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Farinze/vpro-app.git'
+                git branch: 'main', url: 'https://github.com/Farinze/vprojekt-app.git'
             }
         }
 
@@ -48,9 +48,9 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f vpro-container || true
-                    docker run -d -p 8081:8080 --name vpro-container ${DOCKER_IMAGE}
+                    docker run -d -p 9000:8080 --name vpro-container ${DOCKER_IMAGE}
                 '''
-                echo "🚀 Deployed at: http://<your-server-ip>:8081"
+                echo "🚀 Deployed at: http://<your-server-ip>:9000"
             }
         }
     }
