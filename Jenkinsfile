@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "frintzy2024/jenkins-ci:${env.BUILD_ID}"
-        DOCKERHUB_CREDENTIALS = "Docker-CredID"  // Replace with your Jenkins Docker Hub creds ID
+        DOCKER_IMAGE = "devops8114/jenkins-ci:${env.BUILD_ID}"
+        DOCKERHUB_CREDENTIALS = "dockerhub-cred"   // You should create a Jenkins credential with this ID
     }
 
     stages {
@@ -48,9 +48,9 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f vpro-container || true
-                    docker run -d -p 9000:8080 --name vpro-container ${DOCKER_IMAGE}
+                    docker run -d -p 9000:8080 --name vpro-container devops8114/jenkins-ci:${BUILD_ID}
                 '''
-                echo "🚀 Deployed at: http://34.207.206.226:9000"
+                echo "🚀 Deployed at: http://16.170.222.8:9000"
             }
         }
     }
