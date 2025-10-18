@@ -50,7 +50,7 @@ pipeline {
                     docker rm -f vpro-container || true
                     docker run -d -p 9000:8080 --name vpro-container ${DOCKER_IMAGE}
                 '''
-                echo "🚀 Deployed at: http://<your-server-ip>:9000"
+                echo "🚀 Deployed at: http://34.207.206.226:9000"
             }
         }
     }
