@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "meesi0/jenkins.ci:${env.BUILD_ID}"
-        DOCKERHUB_CREDENTIALS = "docker_id"  // Replace with your Jenkins Docker Hub creds ID
+        DOCKER_IMAGE = "frintzy2024/jenkins-ci:${env.BUILD_ID}"
+        DOCKERHUB_CREDENTIALS = "Docker-CredID"  // Replace with your Jenkins Docker Hub creds ID
     }
 
     stages {
