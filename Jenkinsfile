@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "devops8114/jenkins-ci:${env.BUILD_ID}"
-        DOCKERHUB_CREDENTIALS = "dockerhub-cred"   // You should create a Jenkins credential with this ID
+        DOCKERHUB_CREDENTIALS = "credential"   // You should create a Jenkins credential with this ID
     }
 
     stages {
