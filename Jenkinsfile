@@ -50,7 +50,7 @@ pipeline {
                     docker rm -f vpro-container || true
                     docker run -d -p 8000:8080 --name vpro-container devops8114/jenkins-ci:${BUILD_ID}
                 '''
-                echo "🚀 Deployed at: http://16.170.222.8:8000"
+                echo "🚀 Deployed at: http://16.16.160.169:8000"
             }
         }
     }
