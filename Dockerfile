@@ -10,7 +10,8 @@ COPY target/vprofile-*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose port 8080
 EXPOSE 8080
-docker run -d -p 9000:8080 ...
+# docker run -d -p 9000:8080 ...
+RUN docker -d -p 8000:8080 ...
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]
